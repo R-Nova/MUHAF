@@ -6,11 +6,11 @@ from sklearn.linear_model import LinearRegression
 import yfinance as yf
 from io import BytesIO
 
-st.set_page_config(page_title="MUHAF Multi-Asset Predictor", page_icon="??", layout="wide")
+st.set_page_config(page_title="MUHAF Multi-Asset Predictor", page_icon="📊", layout="wide")
 
 # ---------- SIDEBAR ----------
-st.sidebar.title("?? Choose Data Source")
-data_mode = st.sidebar.radio("How do you want to input data?", ["?? Upload CSV", "?? Fetch from Internet"])
+st.sidebar.title("📊 Choose Data Source")
+data_mode = st.sidebar.radio("How do you want to input data?", ["📂 Upload CSV", "🌐 Fetch from Internet"])
 
 # ---------- SETTINGS ----------
 days = st.sidebar.slider("Number of Past Days (for live fetch)", 60, 365, 180)
@@ -18,7 +18,7 @@ symbols_input = st.sidebar.text_input("Enter symbols (for fetch mode only)", "AA
 uploaded_file = st.sidebar.file_uploader("Upload CSV file (must include 'Close' column)", type=["csv"])
 
 # ---------- MAIN TITLE ----------
-st.title("?? MUHAF")
+st.title("📈 MUHAF")
 st.write("Welcome to the MUHAF Stock Price Prediction Dashboard!")
 
 results = {}
@@ -26,7 +26,7 @@ fig, ax = plt.subplots(figsize=(14, 7))
 colors = plt.cm.tab10.colors
 
 # ---------- PROCESS CSV UPLOAD ----------
-if data_mode == "?? Upload CSV":
+if data_mode == "📂 Upload CSV":
     if uploaded_file is not None:
         try:
             df = pd.read_csv(uploaded_file)
@@ -59,10 +59,10 @@ if data_mode == "?? Upload CSV":
         except Exception as e:
             st.error(f"Error processing uploaded CSV: {e}")
     else:
-        st.info("?? Please upload a CSV file.")
+        st.info("📁 Please upload a CSV file.")
 
 # ---------- PROCESS SYMBOLS ----------
-elif data_mode == "?? Fetch from Internet":
+elif data_mode == "🌐 Fetch from Internet":
     symbols = [s.strip().upper() for s in symbols_input.split(",") if s.strip()]
     if not symbols:
         st.warning("Please enter at least one symbol.")
